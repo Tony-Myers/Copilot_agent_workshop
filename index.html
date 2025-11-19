@@ -46,20 +46,21 @@
       import ReactDOM from 'react-dom/client';
 
       // --- Icon Components ---
+      // A11Y: Added aria-hidden="true" to ensure these decorative icons are ignored by screen readers.
       const BrainIcon = (props) => (
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456Z" />
           </svg>
       );
 
       const BookOpenIcon = (props) => (
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18c-2.305 0-4.408.867-6 2.292m0-14.25v14.25" />
           </svg>
       );
       
       const SparkleIcon = (props) => (
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
+          <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" {...props}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" />
               <path strokeLinecap="round" strokeLinejoin="round" d="M18.217 18.217a.75.75 0 0 0 1.06 0l2.122-2.121a.75.75 0 0 0-1.06-1.06l-2.12 2.12a.75.75 0 0 0 0 1.061Zm-12.436 0a.75.75 0 0 1-1.06 0L2.6 16.096a.75.75 0 0 1 1.06-1.06l2.122 2.122a.75.75 0 0 1 0 1.06Z" />
           </svg>
@@ -67,8 +68,9 @@
 
       // --- UI Components ---
       const Header = () => {
+          // A11Y: Added motion-reduce:animate-none to respect user motion preferences
           return (
-              <header className="text-center animate-fade-in-up">
+              <header className="text-center animate-fade-in-up motion-reduce:animate-none">
                   <h1 className="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-emerald-400 mb-4">
                       Supercharge Your Studies with Copilot
                   </h1>
@@ -90,7 +92,8 @@
       const AgentCard = ({ title, description, link, examples, icon, accentColor, animationDelay }) => {
           return (
               <div 
-                  className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl shadow-lg p-6 flex flex-col transition-all duration-300 hover:shadow-2xl hover:border-slate-600 opacity-0 animate-fade-in-up"
+                  // A11Y: Added motion-reduce:animate-none
+                  className="bg-slate-800/50 backdrop-blur-sm border border-slate-700 rounded-2xl shadow-lg p-6 flex flex-col transition-all duration-300 hover:shadow-2xl hover:border-slate-600 opacity-0 animate-fade-in-up motion-reduce:animate-none motion-reduce:opacity-100"
                   style={{ animationDelay: `${animationDelay}ms` }}
               >
                   <div className={`border-l-4 ${accentColor} pl-4 mb-4`}>
@@ -119,6 +122,8 @@
                           href={link}
                           target="_blank"
                           rel="noopener noreferrer"
+                          // A11Y: Added aria-label to distinguish between the multiple "Add to Copilot" buttons
+                          aria-label={`Add ${title} to Copilot`}
                           className="w-full block text-center bg-brand-primary text-white font-semibold py-3 px-6 rounded-lg transition-transform duration-200 hover:scale-105 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-brand-primary"
                       >
                           Add to Copilot
@@ -138,7 +143,8 @@
                   examples: [
                       'Help me understand how the Frank-Starling law relates to cardiac output during exercise',
                       'Explain the difference between herd immunity and vaccine efficacy in simple terms',
-                      `Why does hypokalemia cause muscle weakness but not cardiac arrest in most cases? Can you walk me through this?,
+                      // FIX: Closed the unterminated string literal below
+                      `Why does hypokalemia cause muscle weakness but not cardiac arrest in most cases? Can you walk me through this?`,
                       'Critique my thesis statement for my literature review.'
                   ],
                   icon: <BrainIcon className="w-10 h-10 text-brand-primary" />,
